@@ -3,7 +3,7 @@ const { DataTypes } = require('sequelize');
 
 
 
-const user = sequelize.define('Users', {
+const User = sequelize.define('Users', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -27,4 +27,9 @@ const user = sequelize.define('Users', {
     freezeTableName: true
 })
 
-module.exports = user;
+
+User.associate = (models) => {
+    User.hasMany(models.Trips, { foreignKey: 'adminId'});
+}
+
+module.exports = User;
